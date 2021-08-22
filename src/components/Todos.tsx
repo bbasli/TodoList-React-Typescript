@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/react";
 import React from "react";
 
 import Todo from "../models/todo";
@@ -6,13 +7,19 @@ import TodoItem from "./Todo";
 const Todos: React.FC<{
   items: Todo[];
   onRemoveTodo: (id: string) => void;
-}> = (props) => {
+  onUpdateTodo: (todo: Todo) => void;
+}> = ({ items, onRemoveTodo, onUpdateTodo }) => {
   return (
-    <ul>
-      {props.items.map((item) => (
-        <TodoItem key={item.id} item={item} onRemoveTodo={props.onRemoveTodo} />
+    <Box width="100%" mt={10}>
+      {items.map((item) => (
+        <TodoItem
+          key={item.id}
+          item={item}
+          onRemoveTodo={onRemoveTodo}
+          onUpdateTodo={onUpdateTodo}
+        />
       ))}
-    </ul>
+    </Box>
   );
 };
 

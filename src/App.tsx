@@ -3,6 +3,7 @@ import { useState } from "react";
 import Todos from "./components/Todos";
 import Todo from "./models/todo";
 import NewTodo from "./components/NewTodo";
+import { Center, Container } from "@chakra-ui/react";
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>([
@@ -22,11 +23,33 @@ function App() {
     });
   };
 
+  const onUpdateTodo = (updatedTodo: Todo) => {
+    setTodos((prevTodos) => {
+      return prevTodos.map((todo) =>
+        todo.id === updatedTodo.id ? updatedTodo : todo
+      );
+    });
+  };
+
   return (
-    <div className="App">
+    <Container maxW="container.lg" my={4}>
+      <Center
+        bg="teal"
+        w="100%"
+        p={4}
+        color="white"
+        fontWeight="bold"
+        fontSize="lg"
+      >
+        Welcome to TODO App!
+      </Center>
       <NewTodo onAddTodo={onAddTodo} />
-      <Todos items={todos} onRemoveTodo={onRemoveTodo} />
-    </div>
+      <Todos
+        items={todos}
+        onRemoveTodo={onRemoveTodo}
+        onUpdateTodo={onUpdateTodo}
+      />
+    </Container>
   );
 }
 

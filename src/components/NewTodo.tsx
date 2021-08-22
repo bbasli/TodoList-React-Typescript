@@ -1,25 +1,39 @@
-import { useRef } from "react";
+import { AddIcon } from "@chakra-ui/icons";
+import { HStack, IconButton, Input } from "@chakra-ui/react";
+import React, { useRef } from "react";
 
-const NewTodo: React.FC<{ onAddTodo: (text: string) => void }> = (props) => {
+const NewTodo: React.FC<{ onAddTodo: (text: string) => void }> = ({
+  onAddTodo,
+}) => {
   const todoTextInputRef = useRef<HTMLInputElement>(null);
 
-  const submitHandler = (event: React.FormEvent) => {
-    event.preventDefault();
-
+  const submitHandler = () => {
     const enteredText = todoTextInputRef.current!.value;
 
     if (enteredText.trim().length === 0) return;
-    props.onAddTodo(enteredText);
+    onAddTodo(enteredText);
+    todoTextInputRef.current!.value = '';
+  };
+
+  const handleEnter = (event: any) => {
+    if (event.key === "Enter") {
+      submitHandler();
+    }
   };
 
   return (
-    <form onSubmit={submitHandler}>
-      <label htmlFor="text">Add Todo Text</label>
-      <br />
-      <input type="text" id="text" ref={todoTextInputRef} />
-      <br />
-      <button>Add Todo</button>
-    </form>
+    <HStack align="stretch" mt={4}>
+      <Input
+        placeholder="e.g Tidy my room"
+        ref={todoTextInputRef}
+        onKeyDown={handleEnter}
+      />
+      <IconButton
+        aria-label="Add todo"
+        icon={<AddIcon />}
+        onClick={submitHandler}
+      />
+    </HStack>
   );
 };
 

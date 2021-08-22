@@ -1,32 +1,35 @@
+import {
+  Box,
+  Editable,
+  EditableInput,
+  EditablePreview,
+} from "@chakra-ui/react";
 import React, { useRef } from "react";
 
 import TodoItem from "../models/todo";
 
-const Todo: React.FC<{ item: TodoItem; onRemoveTodo: (id: string) => void }> = (
-  props
-) => {
+const Todo: React.FC<{
+  item: TodoItem;
+  onRemoveTodo: (id: string) => void;
+  onUpdateTodo: (todo: TodoItem) => void;
+}> = ({ item, onRemoveTodo, onUpdateTodo }) => {
+
   const todoIdRef = useRef<HTMLInputElement>(null);
 
   const handleDeleteTodo = (event: React.FormEvent) => {
     event.preventDefault();
 
     const removeId = todoIdRef.current!.value;
-    props.onRemoveTodo(removeId);
+    onRemoveTodo(removeId);
   };
 
   return (
-    <li>
-      <form onSubmit={handleDeleteTodo}>
-        <b>Task: {props.item.text}</b>
-        <br />
-        <input type="hidden" value={props.item.id} ref={todoIdRef} />
-        <span>Date: {new Date(props.item.date).toDateString()}</span>
-        <br />
-        <button>Delete</button>
-        <br />
-        <br />
-      </form>
-    </li>
+    <Box borderWidth="1px" borderRadius="lg" py={2} pl={5} mt={3} width="100%">
+      <Editable defaultValue={item.text} >
+        <EditablePreview />
+        <EditableInput />
+      </Editable>
+    </Box>
   );
 };
 
