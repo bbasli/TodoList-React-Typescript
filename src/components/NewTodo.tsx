@@ -12,7 +12,7 @@ const NewTodo: React.FC<{ onAddTodo: (text: string) => void }> = ({
 
     if (enteredText.trim().length === 0) return;
     onAddTodo(enteredText);
-    todoTextInputRef.current!.value = '';
+    todoTextInputRef.current!.value = "";
   };
 
   const handleEnter = (event: any) => {
@@ -27,11 +27,17 @@ const NewTodo: React.FC<{ onAddTodo: (text: string) => void }> = ({
         placeholder="e.g Tidy my room"
         ref={todoTextInputRef}
         onKeyDown={handleEnter}
+        background="teal.400"
+        fontWeight='bold'
+        border="0"
+        color="white"
+        _placeholder={{ color: "white", fontWeight: "bold" }}
       />
       <IconButton
         aria-label="Add todo"
         icon={<AddIcon />}
         onClick={submitHandler}
+        background="teal.400"
       />
     </HStack>
   );

@@ -3,7 +3,7 @@ import { useState } from "react";
 import Todos from "./components/Todos";
 import Todo from "./models/todo";
 import NewTodo from "./components/NewTodo";
-import { Center, Container } from "@chakra-ui/react";
+import { Box, Center, Container } from "@chakra-ui/react";
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>([
@@ -32,24 +32,29 @@ function App() {
   };
 
   return (
-    <Container maxW="container.lg" my={4}>
-      <Center
-        bg="teal"
-        w="100%"
-        p={4}
-        color="white"
-        fontWeight="bold"
-        fontSize="lg"
-      >
-        Welcome to TODO App!
-      </Center>
-      <NewTodo onAddTodo={onAddTodo} />
-      <Todos
-        items={todos}
-        onRemoveTodo={onRemoveTodo}
-        onUpdateTodo={onUpdateTodo}
-      />
-    </Container>
+    <Box background="red.400" p={0} m={0}>
+      <Container maxW="container.lg" py={8} minHeight="100vh">
+        <Center
+          bg="teal"
+          w="100%"
+          p={4}
+          color="white"
+          fontWeight="bold"
+          fontSize="lg"
+          background="orange.300"
+          borderWidth="0"
+          borderRadius="lg"
+        >
+          Welcome to TODO App!
+        </Center>
+        <NewTodo onAddTodo={onAddTodo} />
+        <Todos
+          items={todos}
+          onRemoveTodo={onRemoveTodo}
+          onUpdateTodo={onUpdateTodo}
+        />
+      </Container>
+    </Box>
   );
 }
 

@@ -13,7 +13,6 @@ const Todo: React.FC<{
   onRemoveTodo: (id: string) => void;
   onUpdateTodo: (todo: TodoItem) => void;
 }> = ({ item, onRemoveTodo, onUpdateTodo }) => {
-
   const todoIdRef = useRef<HTMLInputElement>(null);
 
   const handleDeleteTodo = (event: React.FormEvent) => {
@@ -24,10 +23,21 @@ const Todo: React.FC<{
   };
 
   return (
-    <Box borderWidth="1px" borderRadius="lg" py={2} pl={5} mt={3} width="100%">
-      <Editable defaultValue={item.text} >
+    <Box
+      borderWidth="1px"
+      borderRadius="lg"
+      py={2}
+      pl={5}
+      mt={3}
+      width="100%"
+      color="white"
+      borderColor="red.300"
+      fontWeight="bold"
+      background="orange.300"
+    >
+      <Editable defaultValue={item.text}>
         <EditablePreview />
-        <EditableInput />
+        <EditableInput focusBorderColor="pink.400" />
       </Editable>
     </Box>
   );
